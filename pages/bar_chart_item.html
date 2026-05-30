@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Penjualan per Tipe Item — Visdat Kelompok 2</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
 
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="navbar-brand">
+        <div class="brand-icon">V2</div>
+        Visdat Kelompok 2
+      </a>
+      <a href="../index.html" class="navbar-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+        </svg>
+        Kembali ke Dashboard
+      </a>
+    </div>
+  </nav>
+
+  <!-- header -->
+  <div class="page-hero fade-in">
+    <div class="badge">Task 1</div>
+    <h1>Penjualan Berdasarkan Tipe Item</h1>
+    <p>Total penjualan dikelompokkan berdasarkan kategori produk. Gunakan toggle untuk melihat semua kategori atau hanya 5 teratas.</p>
+  </div>
+
+  <!-- chart -->
+  <div class="chart-container fade-in">
+
+    <div class="chart-header" style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div>
+        <h2>Total Penjualan per Tipe Item</h2>
+        <p>Sumbu X: Tipe Item &nbsp;|&nbsp; Sumbu Y: Total Penjualan (IDR)</p>
+      </div>
+      <!-- toggle semua / top 5 -->
+      <div class="btn-group">
+        <button class="btn-toggle active" id="btn-all">Semua</button>
+        <button class="btn-toggle" id="btn-top5">Top 5</button>
+      </div>
+    </div>
+
+    <!-- stats -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- area chart -->
+    <div id="chart"></div>
+
+    <!-- insight -->
+    <div class="insight-box" id="insight-box">Memuat data...</div>
+
+  </div>
+
+  <!-- tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- footer -->
+  <footer class="footer">
+    Visualisasi Data Penjualan Retail &mdash; <span>Kelompok 2</span> &mdash; Informatika Unsyiah 2025
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="../js/bar_chart_item.js"></script>
+
+</body>
+</html>
