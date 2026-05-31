@@ -26,7 +26,7 @@
   <header class="page-hero">
     <span class="badge">Pie Chart</span>
     <h1>Proporsi Jumlah Outlet berdasarkan Tipe Outlet</h1>
-    <p>Pie chart ini menunjukkan distribusi jumlah outlet unik pada tiap tipe outlet yang tersedia pada dataset.</p>
+    <p>Pie chart ini menunjukkan distribusi jumlah outlet unik pada tiap tipe outlet.</p>
   </header>
 
   <main class="chart-container fade-in">
@@ -35,10 +35,9 @@
       <p>Perhitungan menggunakan jumlah outlet unik, bukan jumlah transaksi.</p>
     </div>
 
-    <div class="stats-row" id="stats-row"></div>
     <div id="chart" class="chart-area" style="height: 420px;"></div>
     <div id="legend" class="legend"></div>
-    <div id="insight-box" class="insight-box"></div>
+    <div class="insight-box" id="insight-box">Memuat data...</div>
   </main>
 
   <div id="tooltip" class="tooltip"></div>
@@ -50,4 +49,3 @@
   <script src="../js/pie_chart.js"></script>
 </body>
 </html>
-
