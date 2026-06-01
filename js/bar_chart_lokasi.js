@@ -91,7 +91,7 @@ function renderChart(data) {
     .attr("font-size", "12px")
     .attr("font-weight", "600")
     .attr("font-family", "var(--font-main)")
-    .text("Total Penjualan (Miliar IDR)");
+    .text("Total Penjualan (Miliar INR)");
 
   // label sumbu x
   svg.append("text")
@@ -157,17 +157,18 @@ function loadCsv(paths) {
   return tryLoad(0);
 }
 
-// format sumbu & label
 function formatMiliar(angka) {
   if (angka === 0) return "0";
+
   const val = angka / 1_000_000_000;
-  return (Number.isInteger(Math.round(val * 10) / 10)
-    ? val.toFixed(0)
-    : val.toFixed(1)) + " M";
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} M`
+    : `${rounded.toFixed(1).replace(".", ",")} M`;
 }
 
-// format insight & tooltip — koma Indonesia
 function formatMiliarLabel(angka) {
   const val = angka / 1_000_000_000;
-  return (Math.round(val * 10) / 10).toFixed(1).replace(".", ",") + " Miliar IDR";
+  return val.toFixed(1).replace(".", ",") + " Miliar INR";
 }

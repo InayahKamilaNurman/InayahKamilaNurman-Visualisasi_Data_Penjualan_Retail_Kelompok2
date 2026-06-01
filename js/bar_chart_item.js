@@ -128,8 +128,7 @@ function renderChart(data) {
     .attr("font-size", "12px")
     .attr("font-weight", "600")
     .attr("font-family", "var(--font-main)")
-    .text("Total Penjualan (Miliar IDR)");
-
+    .text("Total Penjualan (Miliar INR)");
   const tooltip = d3.select("#tooltip");
 
   // gambar batang
@@ -175,21 +174,26 @@ function renderChart(data) {
   // insight
   const top1 = allData[0];
   document.getElementById("insight-box").innerHTML =
-    `${top1.type} adalah tipe item dengan penjualan tertinggi.`;
+  `${top1.type} merupakan tipe item dengan total penjualan tertinggi sebesar ${formatMiliarLabel(top1.total)}.`;
 }
 
 // format sumbu y
 function formatMiliar(angka) {
   if (angka === 0) return "0";
+
   const val = angka / 1_000_000_000;
-  return (Number.isInteger(Math.round(val * 10) / 10)
-    ? val.toFixed(0)
-    : val.toFixed(1)) + " M";
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} M`
+    : `${rounded.toFixed(1).replace(".", ",")} M`;
 }
 
-// format tooltip — koma Indonesia, tidak ada ,0
 function formatMiliarLabel(angka) {
-  const val = Math.round((angka / 1_000_000_000) * 10) / 10;
-  const str = Number.isInteger(val) ? val.toFixed(0) : val.toFixed(1).replace(".", ",");
-  return str + " Miliar IDR";
+  const val = angka / 1_000_000_000;
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} Miliar INR`
+    : `${rounded.toFixed(1).replace(".", ",")} Miliar INR`;
 }

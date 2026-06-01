@@ -68,7 +68,16 @@ function renderChart(data) {
   svg.append("g")
     .attr("class", "axis")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(8).tickFormat(formatJuta));
+.call(
+  d3.axisBottom(x)
+    .ticks(8)
+    .tickFormat(d => {
+      const val = d / 1_000_000;
+      return Number.isInteger(val)
+        ? `${val} Jt`
+        : `${val.toFixed(1).replace(".", ",")} Jt`;
+    })
+);
 
   svg.append("text")
     .attr("x", width / 2)
@@ -76,13 +85,12 @@ function renderChart(data) {
     .attr("text-anchor", "middle")
     .attr("fill", "var(--text-secondary)")
     .attr("font-size", "12px")
-    .text("Harga Produk (Juta IDR)");
+    .text("Harga Produk (Juta INR)"); 
 
   // Sumbu Y
   svg.append("g")
     .attr("class", "axis")
-    .call(d3.axisLeft(y).tickFormat(formatJuta));
-
+    .call(d3.axisLeft(y).tickFormat(formatRibu));
   svg.append("text")
     .attr("x", -height / 2)
     .attr("y", -margin.left + 22)
@@ -90,7 +98,7 @@ function renderChart(data) {
     .attr("text-anchor", "middle")
     .attr("fill", "var(--text-secondary)")
     .attr("font-size", "12px")
-    .text("Total Penjualan (Juta IDR)");
+    .text("Total Penjualan (INR)");
 
   // Trendline (regresi linear)
   const n = data.length;
@@ -133,8 +141,8 @@ function renderChart(data) {
         .classed("visible", true)
         .html(`
           <div class="tooltip-title">${d.itemType}</div>
-          <div class="tooltip-value">Penjualan: ${formatJutaLabel(d.sales)}</div>
-          <div class="tooltip-sub">Harga: ${formatJutaLabel(d.mrp)} &nbsp;|&nbsp; ${d.outletType}</div>
+          <div class="tooltip-value">Penjualan: ${formatSalesLabel(d.sales)}</div>
+          <div class="tooltip-sub">Harga: ${d.mrp.toFixed(0)} INR &nbsp;|&nbsp; ${d.outletType}</div>
         `);
     })
     .on("mousemove", function (event) {
@@ -173,17 +181,16 @@ function correlation(data) {
 }
 
 // Untuk sumbu — singkat
-function formatJuta(angka) {
-  if (angka === 0) return "0";
-  const val = angka / 1_000_000;
-  const str = Number.isInteger(val) ? val.toFixed(0) : val.toFixed(1);
-  return str.replace(".", ",") + " Jt";
+function formatRibu(angka) {
+  return Math.round(angka).toLocaleString("id-ID");
 }
 
 // Untuk tooltip — dengan satuan lengkap
-function formatJutaLabel(angka) {
-  if (angka === 0) return "0";
-  const val = angka / 1_000_000;
-  const str = (Math.round(val * 10) / 10).toFixed(1).replace(".", ",");
-  return str + " Juta IDR";
+function formatSalesLabel(angka) {
+  const val = angka / 1000;
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} Rb INR`
+    : `${rounded.toFixed(1).replace(".", ",")} Rb INR`;
 }

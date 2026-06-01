@@ -29,7 +29,7 @@ loadCsv(DATA_PATHS).then(data => {
 
   const top = chartData[0];
   document.getElementById("insight-box").textContent =
-    `${top.type} adalah tipe outlet dengan penjualan tertinggi dengan total penjualan ${formatMiliarLabel(top.total)}.`;
+  `${top.type} merupakan tipe outlet dengan total penjualan tertinggi sebesar ${formatMiliarLabel(top.total)}.`;
 
 }).catch(err => {
   console.error(err);
@@ -110,8 +110,7 @@ function renderChart(data) {
     .attr("font-size", "12px")
     .attr("font-weight", "600")
     .attr("font-family", "var(--font-main)")
-    .text("Total Penjualan (Miliar IDR)");
-
+.text("Total Penjualan (Miliar INR)");
   const tooltip = d3.select("#tooltip");
 
   // gambar batang
@@ -170,17 +169,22 @@ function loadCsv(paths) {
   return tryLoad(0);
 }
 
-// format miliar untuk sumbu & tooltip
 function formatMiliar(angka) {
   if (angka === 0) return "0";
+
   const val = angka / 1_000_000_000;
-  return (Number.isInteger(Math.round(val * 10) / 10)
-    ? val.toFixed(0)
-    : val.toFixed(1)) + " M";
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} M`
+    : `${rounded.toFixed(1).replace(".", ",")} M`;
 }
 
-// format miliar untuk insight — pakai koma Indonesia
 function formatMiliarLabel(angka) {
   const val = angka / 1_000_000_000;
-  return (Math.round(val * 10) / 10).toFixed(1).replace(".", ",") + " Miliar IDR";
+  const rounded = Number(val.toFixed(1));
+
+  return rounded % 1 === 0
+    ? `${rounded.toFixed(0)} Miliar INR`
+    : `${rounded.toFixed(1).replace(".", ",")} Miliar INR`;
 }

@@ -21,9 +21,12 @@ loadCsv(DATA_PATHS).then(data => {
   const rataRata     = totalTx > 0 ? totalSales / totalTx : 0;
   const jumlahOutlet = new Set(validData.map(d => d.Outlet_Identifier)).size;
 
-  animateCount("stat-total-sales",  totalSales,   formatMiliar);
+  console.log("Total Sales =", totalSales);
+console.log("Total Tx =", totalTx);
+console.log("Rata-rata =", rataRata);
+
+  animateCount("stat-total-sales",  totalSales,   formatJutaINR);
   animateCount("stat-total-items",  totalTx,      d => Math.round(d).toLocaleString("id-ID"));
-  animateCount("stat-avg-sales",    rataRata,     formatJuta);
   animateCount("stat-outlet-count", jumlahOutlet, d => Math.round(d).toString());
 
 }).catch(err => {
@@ -71,16 +74,12 @@ function animateCount(id, target, formatter) {
   requestAnimationFrame(update);
 }
 
-// format miliar — "125,1 M"
-function formatMiliar(angka) {
-  if (!angka || angka === 0) return "0";
+// Total Sales
+function formatJutaINR(angka) {
   const val = angka / 1_000_000_000;
-  return (Math.round(val * 10) / 10).toFixed(1).replace(".", ",") + " M";
+
+  return (Math.round(val * 10) / 10)
+    .toFixed(1)
+    .replace(".", ",") + " Miliar INR";
 }
 
-// format juta — "14,7 Jt"
-function formatJuta(angka) {
-  if (!angka || angka === 0) return "0";
-  const val = angka / 1_000_000;
-  return (Math.round(val * 10) / 10).toFixed(1).replace(".", ",") + " Jt";
-}

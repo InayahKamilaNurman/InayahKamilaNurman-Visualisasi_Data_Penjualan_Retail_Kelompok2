@@ -84,8 +84,11 @@ function renderChart(prices, binCount) {
   svg.append("g")
     .attr("class", "axis")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).ticks(8).tickFormat(formatRibu))
-    .selectAll("text")
+.call(
+  d3.axisBottom(xScale)
+    .ticks(8)
+    .tickFormat(d => d.toLocaleString("id-ID"))
+)    .selectAll("text")
     .style("font-size", "12px");
 
   // sumbu y
@@ -114,8 +117,7 @@ function renderChart(prices, binCount) {
     .attr("font-size", "12px")
     .attr("font-weight", "600")
     .attr("font-family", "var(--font-main)")
-    .text("Harga Produk (Ribu IDR)");
-
+    .text("Harga Produk (INR)");
   const tooltip = d3.select("#tooltip");
 
   // batang histogram
@@ -165,12 +167,13 @@ function renderChart(prices, binCount) {
   const maxBin    = [...bins].sort((a, b) => b.length - a.length)[0];
   const persen    = ((maxBin.length / prices.length) * 100).toFixed(1).replace(".", ",");
   document.getElementById("insight-box").textContent =
-    `Sebagian besar produk memiliki harga di kisaran ${formatRibuLabel(maxBin.x0)}–${formatRibuLabel(maxBin.x1)}, dengan ${maxBin.length} item (${persen}% dari total produk).`;
-}
-
+    `Sebagian besar produk memiliki harga di kisaran ${Math.round(maxBin.x0).toLocaleString("id-ID")}–${Math.round(maxBin.x1).toLocaleString("id-ID")} INR, dengan ${maxBin.length} item (${persen}% dari total produk).`
+  }
+  
 function loadCsv(paths) {
   const parse = d => ({ Item_MRP: +d.Item_MRP });
   const tryLoad = i => {
+
     if (i >= paths.length) return Promise.reject(new Error("CSV tidak ditemukan"));
     return d3.csv(paths[i], parse).catch(() => tryLoad(i + 1));
   };
@@ -178,24 +181,15 @@ function loadCsv(paths) {
 }
 
 // format sumbu x — singkat tanpa Rp
-function formatRibu(angka) {
-  if (angka === 0) return "0";
-  if (angka >= 1_000_000) {
-    const val = angka / 1_000_000;
-    const str = Number.isInteger(val) ? val.toFixed(0) : val.toFixed(1);
-    return str.replace(".", ",") + " Jt";
-  }
-  if (angka >= 1_000) return (angka / 1_000).toFixed(0) + " Rb";
-  return angka.toString();
+ function formatRibuLabel(angka) {
+  return Math.round(angka).toLocaleString("id-ID") + " INR";
 }
 
 // format insight & tooltip
 function formatRibuLabel(angka) {
-  if (angka >= 1_000_000) {
-    const val = angka / 1_000_000;
-    const str = Number.isInteger(val) ? val.toFixed(0) : val.toFixed(1);
-    return str.replace(".", ",") + " Jt IDR";
-  }
-  if (angka >= 1_000) return (angka / 1_000).toFixed(0) + " Rb IDR";
-  return angka + " IDR";
+  return Math.round(angka).toLocaleString("id-ID") + " INR";
+}
+
+function formatINR(angka) {
+  return Math.round(angka).toLocaleString("id-ID") + " INR";
 }

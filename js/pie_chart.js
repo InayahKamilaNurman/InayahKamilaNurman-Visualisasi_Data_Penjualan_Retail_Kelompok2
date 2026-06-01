@@ -140,8 +140,7 @@ function renderChart(data) {
     swatch.style.flexShrink = "0";
 
     const label = document.createElement("span");
-    const pct = Math.round((d.count / total) * 100);
-    label.textContent = `${d.type} — ${pct}%`;
+    label.textContent = d.type;
 
     item.appendChild(swatch);
     item.appendChild(label);
