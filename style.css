@@ -363,6 +363,12 @@ a:hover {
   fill: var(--accent);
 }
 
+/* bar-outlet — warna dikontrol dari JS, tidak di-override CSS */
+.bar-outlet {
+  transition: fill 0.2s;
+  cursor: pointer;
+}
+
 .line-path {
   fill: none;
   stroke: var(--line-stroke);

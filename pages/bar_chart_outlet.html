@@ -3,48 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bar Chart Outlet - Visualisasi Data Penjualan Retail</title>
+  <title>Penjualan per Tipe Outlet — Visdat Kelompok 2</title>
   <link rel="stylesheet" href="../style.css" />
-  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
+
+  <!-- navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a class="navbar-brand" href="../index.html">
-        <span class="brand-icon">VD</span>
-        <span>Visualisasi Data Retail</span>
+        <div class="brand-icon">V2</div>
+        Visdat Kelompok 2
       </a>
-      <a class="navbar-back" href="../index.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 18l-6-6 6-6" />
+      <a href="../index.html" class="navbar-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
         </svg>
-        Kembali ke dashboard
+        Kembali ke Dashboard
       </a>
     </div>
   </nav>
 
-  <header class="page-hero">
-    <span class="badge">Bar Chart</span>
-    <h1>Total Penjualan per Tipe Outlet</h1>
-    <p>Visualisasi ini menampilkan total penjualan berdasarkan tipe outlet untuk melihat tipe outlet dengan kontribusi terbesar.</p>
-  </header>
+  <!-- header -->
+  <div class="page-hero fade-in">
+    <h1>Penjualan Berdasarkan Tipe Outlet</h1>
+    <p>Total penjualan dikelompokkan berdasarkan tipe outlet.</p>
+  </div>
 
-  <main class="chart-container fade-in">
-    <div class="chart-header">
-      <h2>Bar Chart Total Penjualan per Tipe Outlet</h2>
-      <p>Data diurutkan dari total penjualan terbesar ke terkecil.</p>
-    </div>
-
-    <div id="chart" class="chart-area"></div>
+  <!-- chart -->
+  <div class="chart-container fade-in">
+    <div id="chart"></div>
     <div class="insight-box" id="insight-box">Memuat data...</div>
-  </main>
+  </div>
 
-  <div id="tooltip" class="tooltip"></div>
+  <!-- tooltip -->
+  <div class="tooltip" id="tooltip"></div>
 
+  <!-- footer -->
   <footer class="footer">
-    <span>Kelompok 2</span> — Praktikum Visualisasi Data
+    Visualisasi Data Penjualan Retail &mdash; <span>Kelompok 2</span> &mdash; Informatika Unsyiah 2026
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="../js/bar_chart_outlet.js"></script>
+
 </body>
 </html>

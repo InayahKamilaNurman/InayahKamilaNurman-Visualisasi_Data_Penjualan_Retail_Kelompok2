@@ -1,101 +1,73 @@
+// Kelompok 2 - dashboard controller
+
 const DATA_PATHS = [
   "Data/Dataset_Visdat_Cleaned.csv",
   "data/Dataset_Visdat_Cleaned.csv"
 ];
 
+// load data
 loadCsv(DATA_PATHS).then(data => {
-  // 1. Total Penjualan
-  const totalSales = d3.sum(data, d => d.Item_Outlet_Sales);
 
-  // 2. Total Transaksi (jumlah baris data)
-  const totalTransactions = data.length;
+  const totalSales       = d3.sum(data, d => d.Item_Outlet_Sales);
+  const totalTransaksi   = data.length;
+  const rataRata         = totalSales / totalTransaksi;
+  const jumlahOutlet     = new Set(data.map(d => d.Outlet_Identifier)).size;
 
-  // 3. Rata-rata per Transaksi
-  const averageSales = totalSales / totalTransactions;
-
-  // 4. Jumlah Outlet Unik
-  const uniqueOutlets = new Set(data.map(d => d.Outlet_Identifier)).size;
-
-  // Render metrik ke UI dengan transisi atau animasi teks
-  animateCount("stat-total-sales", totalSales, formatTotalSales);
-  animateCount("stat-total-items", totalTransactions, d => d.toLocaleString("id-ID"));
-  animateCount("stat-avg-sales", averageSales, formatAverageSales);
-  animateCount("stat-outlet-count", uniqueOutlets, d => d.toLocaleString("id-ID"));
+  // animasi angka
+  animateCount("stat-total-sales",  totalSales,     formatMiliar);
+  animateCount("stat-total-items",  totalTransaksi, d => Math.round(d).toLocaleString("id-ID"));
+  animateCount("stat-avg-sales",    rataRata,       formatJuta);
+  animateCount("stat-outlet-count", jumlahOutlet,   d => Math.round(d).toString());
 
 }).catch(err => {
-  console.error("Gagal memproses data dashboard:", err);
-  // Set fallback jika gagal load
-  document.getElementById("stat-total-sales").textContent = "Rp -";
-  document.getElementById("stat-total-items").textContent = "-";
-  document.getElementById("stat-avg-sales").textContent = "Rp -";
-  document.getElementById("stat-outlet-count").textContent = "-";
+  console.error("Gagal load data:", err);
+  ["stat-total-sales","stat-total-items","stat-avg-sales","stat-outlet-count"]
+    .forEach(id => { document.getElementById(id).textContent = "-"; });
 });
 
-// Fungsi pembantu untuk meload CSV dari beberapa path alternatif
+// coba load dari beberapa path
 function loadCsv(paths) {
   const parse = d => ({
     Item_Outlet_Sales: +d.Item_Outlet_Sales,
     Outlet_Identifier: d.Outlet_Identifier
   });
-
   const tryLoad = i => {
     if (i >= paths.length) return Promise.reject(new Error("CSV tidak ditemukan"));
     return d3.csv(paths[i], parse).catch(() => tryLoad(i + 1));
   };
-
   return tryLoad(0);
 }
 
-// Fungsi animasi counter angka dari 0 ke target agar tampilan dashboard terasa hidup
-function animateCount(elementId, targetValue, formatter) {
-  const el = document.getElementById(elementId);
+// animasi counter
+function animateCount(id, target, formatter) {
+  const el = document.getElementById(id);
   if (!el) return;
-
-  const duration = 1200; // milidetik
+  const duration  = 1200;
   const startTime = performance.now();
-
-  function update(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    
-    // Easing fungsi: easeOutQuad
-    const easeProgress = progress * (2 - progress);
-    const currentValue = targetValue * easeProgress;
-
-    el.textContent = formatter(currentValue);
-
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      el.textContent = formatter(targetValue);
-    }
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const ease     = progress * (2 - progress);
+    el.textContent = formatter(target * ease);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = formatter(target);
   }
-
   requestAnimationFrame(update);
 }
 
-// Formatter untuk Total Penjualan (dalam Miliar / Triliun Rupiah)
-function formatTotalSales(value) {
-  if (value === 0) return "Rp 0";
-  if (value >= 1_000_000_000) {
-    const val = value / 1_000_000_000;
-    return "Rp " + val.toFixed(2) + " M";
-  }
-  if (value >= 1_000_000) {
-    return "Rp " + (value / 1_000_000).toFixed(2) + " Jt";
-  }
-  return "Rp " + Math.round(value).toLocaleString("id-ID");
+// format miliar — untuk total penjualan
+function formatMiliar(angka) {
+  if (angka === 0) return "0";
+  const val = angka / 1_000_000_000;
+  return (Number.isInteger(Math.round(val * 10) / 10)
+    ? val.toFixed(0)
+    : val.toFixed(1)) + " M";
 }
 
-// Formatter untuk Rerata Transaksi (dalam Juta / Ribu Rupiah)
-function formatAverageSales(value) {
-  if (value === 0) return "Rp 0";
-  if (value >= 1_000_000) {
-    const val = value / 1_000_000;
-    return "Rp " + val.toFixed(2) + " Jt";
-  }
-  if (value >= 1_000) {
-    return "Rp " + (value / 1_000).toFixed(0) + " Rb";
-  }
-  return "Rp " + Math.round(value).toLocaleString("id-ID");
+// format juta — untuk rerata transaksi
+function formatJuta(angka) {
+  if (angka === 0) return "0";
+  const val = angka / 1_000_000;
+  return (Number.isInteger(Math.round(val * 10) / 10)
+    ? val.toFixed(0)
+    : val.toFixed(1)) + " Jt";
 }

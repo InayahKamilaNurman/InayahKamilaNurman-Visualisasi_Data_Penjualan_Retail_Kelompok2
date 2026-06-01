@@ -9,12 +9,12 @@
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a class="navbar-brand" href="index.html">
-        <span class="brand-icon">VD</span>
-        <span>Visualisasi Data Retail — Kelompok 2</span>
+        <span class="brand-icon">V2</span>
+        <span>Visdat Kelompok 2</span>
       </a>
       <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); background: var(--border); padding: 4px 10px; border-radius: 99px;">
         Informatika Unsyiah
@@ -22,57 +22,50 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- hero -->
   <header class="page-hero fade-in">
-    <span class="badge">Retail Analytics Portal</span>
+    <span class="badge">Portal Analisis Retail</span>
     <h1>Visualisasi Data Penjualan Retail & Outlet</h1>
-    <p>Selamat datang di portal analisis kelompok kami. Dashboard interaktif ini menyajikan sebaran harga produk, tren penjualan historis, proporsi outlet, dan kontribusi performa finansial berdasarkan tipe outlet, kategori item, serta tipe wilayah lokasi.</p>
+    <p>Dashboard interaktif yang menyajikan analisis penjualan berdasarkan tipe item, tipe outlet, lokasi, tren tahunan, dan distribusi harga produk.</p>
   </header>
 
+  <!-- stats — ringkasan dataset -->
   <div class="page-wrapper fade-in">
-    
-    <!-- KPI Summary Row (Loaded Dynamically via js/main.js) -->
     <div class="stats-row">
       <div class="stat-item">
-        <div id="stat-total-sales" class="stat-value">Rp 0</div>
-        <div class="stat-label">Total Penjualan</div>
+        <div id="stat-total-sales" class="stat-value">—</div>
+        <div class="stat-label">Total Penjualan (Miliar IDR)</div>
       </div>
       <div class="stat-item">
-        <div id="stat-total-items" class="stat-value">0</div>
+        <div id="stat-total-items" class="stat-value">—</div>
         <div class="stat-label">Total Transaksi</div>
       </div>
       <div class="stat-item">
-        <div id="stat-avg-sales" class="stat-value">Rp 0</div>
-        <div class="stat-label">Rerata Transaksi</div>
+        <div id="stat-avg-sales" class="stat-value">—</div>
+        <div class="stat-label">Rerata Transaksi (Juta IDR)</div>
       </div>
       <div class="stat-item">
-        <div id="stat-outlet-count" class="stat-value">0</div>
+        <div id="stat-outlet-count" class="stat-value">—</div>
         <div class="stat-label">Outlet Aktif</div>
       </div>
     </div>
-
   </div>
 
-  <!-- Dashboard Grid -->
+  <!-- dashboard grid -->
   <main class="dashboard-grid fade-in">
 
-    <!-- Card 1: Bar Chart Lokasi (NEW) -->
+    <!-- bar chart lokasi -->
     <a class="card-link" href="pages/bar_chart_lokasi.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Bar Chart</span>
         <h3 class="card-title">Penjualan per Lokasi Outlet</h3>
-        <p class="card-subtitle">Menganalisis performa finansial berdasarkan klasifikasi tingkat lokasi wilayah (Tier 1, Tier 2, Tier 3).</p>
+        <p class="card-subtitle">Perbandingan total penjualan berdasarkan lokasi outlet (Tier 1, Tier 2, Tier 3).</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Bar Chart Location -->
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
             <path d="M2 20h20" stroke="var(--border)" stroke-linecap="round" />
-            <rect x="4" y="11" width="4" height="9" rx="1" fill="var(--cat-1)" stroke="var(--cat-1)" />
-            <rect x="10" y="7" width="4" height="13" rx="1" fill="var(--cat-2)" stroke="var(--cat-2)" />
-            <rect x="16" y="4" width="4" height="16" rx="1" fill="var(--cat-3)" stroke="var(--cat-3)" />
-            <g transform="translate(14.5, -2) scale(0.3)" stroke="var(--accent)" stroke-width="3" fill="var(--accent-light)">
-              <path d="M12 2a8 8 0 00-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 00-8-8z" />
-              <circle cx="12" cy="10" r="3" fill="var(--accent)" />
-            </g>
+            <rect x="4" y="11" width="4" height="9" rx="1" fill="var(--cat-1)" />
+            <rect x="10" y="7" width="4" height="13" rx="1" fill="var(--cat-2)" />
+            <rect x="16" y="4" width="4" height="16" rx="1" fill="var(--cat-3)" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -82,20 +75,25 @@
       </article>
     </a>
 
-    <!-- Card 2: Line Chart Tren (NEW) -->
+    <!-- line chart -->
     <a class="card-link" href="pages/line_chart.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Line Chart</span>
         <h3 class="card-title">Tren Penjualan Tahunan</h3>
-        <p class="card-subtitle">Memantau pertumbuhan dan performa akumulatif kontribusi berdasarkan tahun berdirinya outlet retail.</p>
+        <p class="card-subtitle">Tren penjualan berdasarkan tahun berdirinya outlet retail.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Line Chart Trend -->
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-            <path d="M3 12l4-4 6 6 8-8" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M3 20h18M3 4v16" stroke-opacity="0.3" />
-            <circle cx="7" cy="8" r="2" fill="var(--accent)" stroke="white" stroke-width="1"/>
-            <circle cx="13" cy="14" r="2" fill="var(--accent)" stroke="white" stroke-width="1"/>
-            <circle cx="21" cy="6" r="2" fill="var(--accent)" stroke="white" stroke-width="1"/>
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <!-- sumbu -->
+            <line x1="8" y1="8" x2="8" y2="52" stroke="var(--border)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="8" y1="52" x2="54" y2="52" stroke="var(--border)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- garis tren -->
+            <polyline points="8,45 18,38 28,40 38,25 48,18" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- titik -->
+            <circle cx="8"  cy="45" r="3" fill="var(--accent)" stroke="white" stroke-width="1.5"/>
+            <circle cx="18" cy="38" r="3" fill="var(--accent)" stroke="white" stroke-width="1.5"/>
+            <circle cx="28" cy="40" r="3" fill="var(--accent)" stroke="white" stroke-width="1.5"/>
+            <circle cx="38" cy="25" r="3" fill="var(--accent)" stroke="white" stroke-width="1.5"/>
+            <circle cx="48" cy="18" r="3" fill="var(--accent)" stroke="white" stroke-width="1.5"/>
           </svg>
         </div>
         <div class="card-footer-link">
@@ -105,21 +103,20 @@
       </article>
     </a>
 
-    <!-- Card 3: Histogram Distribusi Harga (NEW) -->
+    <!-- histogram -->
     <a class="card-link" href="pages/histogram.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Histogram</span>
-        <h3 class="card-title">Distribusi Harga Produk (MRP)</h3>
-        <p class="card-subtitle">Melihat kerapatan dan penyebaran harga eceran maksimum dari seluruh katalog produk eceran.</p>
+        <h3 class="card-title">Distribusi Harga Produk</h3>
+        <p class="card-subtitle">Sebaran harga produk (Item MRP) dari seluruh dataset.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Histogram (Bell Curve) -->
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
             <path d="M2 20h20" stroke="var(--border)" stroke-linecap="round" />
-            <rect x="3" y="14" width="2.5" height="6" rx="0.5" fill="var(--seq-4)" stroke="var(--seq-4)" />
-            <rect x="6.5" y="10" width="2.5" height="10" rx="0.5" fill="var(--seq-3)" stroke="var(--seq-3)" />
-            <rect x="10" y="5" width="2.5" height="15" rx="0.5" fill="var(--seq-2)" stroke="var(--seq-2)" />
-            <rect x="13.5" y="8" width="2.5" height="12" rx="0.5" fill="var(--seq-3)" stroke="var(--seq-3)" />
-            <rect x="17" y="13" width="2.5" height="7" rx="0.5" fill="var(--seq-4)" stroke="var(--seq-4)" />
+            <rect x="3"    y="14" width="2.5" height="6"  rx="0.5" fill="var(--seq-5)" />
+            <rect x="6.5"  y="10" width="2.5" height="10" rx="0.5" fill="var(--seq-4)" />
+            <rect x="10"   y="5"  width="2.5" height="15" rx="0.5" fill="var(--seq-3)" />
+            <rect x="13.5" y="8"  width="2.5" height="12" rx="0.5" fill="var(--seq-2)" />
+            <rect x="17"   y="13" width="2.5" height="7"  rx="0.5" fill="var(--seq-1)" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -129,20 +126,20 @@
       </article>
     </a>
 
-    <!-- Card 4: Bar Chart Item -->
+    <!-- bar chart item -->
     <a class="card-link" href="pages/bar_chart_item.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Bar Chart</span>
         <h3 class="card-title">Penjualan per Tipe Item</h3>
-        <p class="card-subtitle">Menampilkan total nominal penjualan produk yang dikelompokkan berdasarkan rumpun tipe kategori produk.</p>
+        <p class="card-subtitle">Total penjualan dikelompokkan berdasarkan kategori produk.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Bar Chart Item (Horizontal Ranking) -->
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-            <path d="M4 2v18" stroke="var(--border)" stroke-linecap="round" />
-            <path d="M4 20h18" stroke="var(--border)" stroke-linecap="round" />
-            <rect x="4" y="4" width="15" height="3" rx="0.5" fill="var(--primary)" stroke="var(--primary)" />
-            <rect x="4" y="9" width="11" height="3" rx="0.5" fill="var(--primary-dark)" stroke="var(--primary-dark)" />
-            <rect x="4" y="14" width="7" height="3" rx="0.5" fill="var(--accent)" stroke="var(--accent)" />
+            <path d="M2 20h20" stroke="var(--border)" stroke-linecap="round" />
+            <rect x="3"  y="6"  width="3" height="14" rx="1" fill="var(--primary)" />
+            <rect x="7"  y="9"  width="3" height="11" rx="1" fill="var(--primary)" />
+            <rect x="11" y="12" width="3" height="8"  rx="1" fill="var(--primary)" />
+            <rect x="15" y="14" width="3" height="6"  rx="1" fill="var(--primary)" />
+            <rect x="19" y="16" width="3" height="4"  rx="1" fill="var(--primary)" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -152,17 +149,18 @@
       </article>
     </a>
 
-    <!-- Card 5: Bar Chart Outlet -->
+    <!-- bar chart outlet -->
     <a class="card-link" href="pages/bar_chart_outlet.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Bar Chart</span>
         <h3 class="card-title">Penjualan per Tipe Outlet</h3>
-        <p class="card-subtitle">Melihat kontribusi dan perbandingan volume transaksi nominal penjualan per varian tipe outlet penjualan.</p>
+        <p class="card-subtitle">Perbandingan total penjualan berdasarkan tipe outlet.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Bar Chart Outlet -->
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-            <path d="M3 3h18v4H3zM4 7h16v13H4z" />
-            <path d="M9 11h6v4H9z" stroke-dasharray="1 1" />
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+            <path d="M2 20h20" stroke="var(--border)" stroke-linecap="round" />
+            <rect x="3"  y="4"  width="4" height="16" rx="1" fill="var(--cat-1)" />
+            <rect x="9"  y="10" width="4" height="10" rx="1" fill="var(--cat-2)" />
+            <rect x="15" y="13" width="4" height="7"  rx="1" fill="var(--cat-3)" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -172,18 +170,22 @@
       </article>
     </a>
 
-    <!-- Card 6: Pie Chart -->
+    <!-- pie chart -->
     <a class="card-link" href="pages/pie_chart.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Pie Chart</span>
-        <h3 class="card-title">Proporsi Jenis Outlet</h3>
-        <p class="card-subtitle">Membandingkan rasio pembagian sebaran jumlah outlet fisik retail berdasarkan tipe outlet unik.</p>
+        <h3 class="card-title">Proporsi Tipe Outlet</h3>
+        <p class="card-subtitle">Proporsi jumlah outlet berdasarkan tipe outlet.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Pie Chart -->
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 3v9h9" stroke-linecap="round" />
-            <path d="M12 12l-6.36 6.36" stroke-dasharray="1 1" />
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <!-- slice 1: 60% biru ~216deg -->
+            <path d="M30 30 L30 5 A25 25 0 1 1 5.1 42.5 Z" fill="var(--cat-1)" />
+            <!-- slice 2: 20% oranye ~72deg -->
+            <path d="M30 30 L5.1 42.5 A25 25 0 0 1 17.5 7.8 Z" fill="var(--cat-2)" />
+            <!-- slice 3: 10% hijau ~36deg -->
+            <path d="M30 30 L17.5 7.8 A25 25 0 0 1 30 5 Z" fill="var(--cat-3)" />
+            <!-- lubang tengah donut -->
+            <circle cx="30" cy="30" r="11" fill="var(--bg)" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -193,20 +195,22 @@
       </article>
     </a>
 
-    <!-- Card 7: Scatter Plot -->
+    <!-- scatter plot -->
     <a class="card-link" href="pages/scatter_plot.html">
       <article class="card">
         <span class="badge" style="background: var(--accent-light); color: var(--accent);">Scatter Plot</span>
-        <h3 class="card-title">Korelasi Harga vs Penjualan</h3>
-        <p class="card-subtitle">Melihat sebaran korelasi relasional antara harga retail produk dengan nilai total penjualan outlet.</p>
+        <h3 class="card-title">Hubungan Harga vs Penjualan</h3>
+        <p class="card-subtitle">Hubungan antara harga produk dan total penjualan per transaksi.</p>
         <div class="chart-preview" style="display: flex; align-items: center; justify-content: center; background: var(--bg); border-radius: var(--radius-md);">
-          <!-- Custom SVG Icon Representative of Scatter Plot -->
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-            <circle cx="6" cy="15" r="2" fill="var(--primary)" />
-            <circle cx="10" cy="8" r="2.5" fill="var(--accent)" stroke="white" stroke-width="1" />
-            <circle cx="14" cy="18" r="2" fill="var(--primary)" />
-            <circle cx="18" cy="12" r="3" fill="var(--primary-dark)" />
-            <path d="M3 20h18M3 4v16" stroke-opacity="0.3" />
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+            <path d="M3 20h18M3 4v16" stroke="var(--border)" stroke-linecap="round" />
+            <line x1="4" y1="19" x2="20" y2="5" stroke="var(--primary)" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+            <circle cx="6"  cy="17" r="1.5" fill="var(--primary)" fill-opacity="0.7" />
+            <circle cx="9"  cy="14" r="1.5" fill="var(--primary)" fill-opacity="0.7" />
+            <circle cx="11" cy="13" r="1.5" fill="var(--primary)" fill-opacity="0.7" />
+            <circle cx="14" cy="10" r="1.5" fill="var(--primary)" fill-opacity="0.7" />
+            <circle cx="17" cy="8"  r="1.5" fill="var(--primary)" fill-opacity="0.7" />
+            <circle cx="19" cy="6"  r="1.5" fill="var(--primary)" fill-opacity="0.7" />
           </svg>
         </div>
         <div class="card-footer-link">
@@ -218,12 +222,11 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- footer -->
   <footer class="footer">
     Visualisasi Data Penjualan Retail &mdash; <span>Kelompok 2</span> &mdash; Informatika Unsyiah 2026
   </footer>
 
-  <!-- Load Dashboard Controller -->
   <script src="js/main.js"></script>
 </body>
 </html>
